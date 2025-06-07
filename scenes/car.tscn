@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://yf3snqe4dduq"]
+
+[ext_resource type="Script" path="res://scripts/car.gd" id="1_w08os"]
+[ext_resource type="Texture2D" uid="uid://bsdbw30ikl1ou" path="res://sprites/car_red.png" id="2_jgkuu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04o2r"]
+size = Vector2(14, 10)
+
+[node name="Car" type="Area2D"]
+z_index = 3
+script = ExtResource("1_w08os")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jgkuu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_04o2r")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

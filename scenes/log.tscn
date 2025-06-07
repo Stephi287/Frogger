@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwkp7dovghs3v"]
+
+[ext_resource type="Script" path="res://scripts/log.gd" id="1_kulfy"]
+[ext_resource type="Texture2D" uid="uid://b8bd8l5g4pcxn" path="res://sprites/log_medium.png" id="1_qufdh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgidr"]
+size = Vector2(32, 8)
+
+[node name="Log" type="Area2D"]
+z_index = 1
+script = ExtResource("1_kulfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+top_level = true
+shape = SubResource("RectangleShape2D_bgidr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qufdh")
+
+[node name="SnapLeft" type="Marker2D" parent="."]
+position = Vector2(-13, 0)
+
+[node name="SnapCenter" type="Marker2D" parent="."]
+
+[node name="SnapRight" type="Marker2D" parent="."]
+position = Vector2(13, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,233 @@
+[gd_scene load_steps=16 format=4 uid="uid://csi5r7b6lk700"]
+
+[ext_resource type="Texture2D" uid="uid://bxhlcg4w8hvqn" path="res://sprites/terrain.png" id="1_dcae4"]
+[ext_resource type="PackedScene" uid="uid://b8pfq1fban75" path="res://scenes/frog.tscn" id="2_qbslo"]
+[ext_resource type="PackedScene" uid="uid://yf3snqe4dduq" path="res://scenes/car.tscn" id="3_ikbu2"]
+[ext_resource type="Script" path="res://scripts/spawner.gd" id="4_hdklh"]
+[ext_resource type="PackedScene" uid="uid://dwkp7dovghs3v" path="res://scenes/log.tscn" id="5_fkymg"]
+[ext_resource type="PackedScene" uid="uid://bigloylbraruj" path="res://scenes/turtle.tscn" id="6_rc2sc"]
+[ext_resource type="Texture2D" uid="uid://bwsaknrvx24bb" path="res://sprites/frog.png" id="7_7wb3b"]
+[ext_resource type="Script" path="res://scripts/win_ui.gd" id="7_y30ow"]
+[ext_resource type="FontFile" uid="uid://cwrxodf8j2hhg" path="res://fonts/ByteBounce.ttf" id="9_jqf74"]
+[ext_resource type="Script" path="res://scripts/gamestate.gd" id="9_muik2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgt5v"]
+size = Vector2(319, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ic73b"]
+size = Vector2(32, 15)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mldvr"]
+texture = ExtResource("1_dcae4")
+0:1/0 = 0
+0:2/0 = 0
+2:0/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6qpl3"]
+sources/0 = SubResource("TileSetAtlasSource_mldvr")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vojy0"]
+size = Vector2(320, 13)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Frog" parent="." instance=ExtResource("2_qbslo")]
+position = Vector2(169, 232)
+
+[node name="Spawner" type="Node2D" parent="." node_paths=PackedStringArray("frog")]
+script = ExtResource("4_hdklh")
+car_scene = ExtResource("3_ikbu2")
+log_scene = ExtResource("5_fkymg")
+turtle_scene = ExtResource("6_rc2sc")
+frog = NodePath("../Frog")
+
+[node name="Water" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+position = Vector2(160.5, 88.5)
+shape = SubResource("RectangleShape2D_sgt5v")
+
+[node name="GameState" type="Node2D" parent="."]
+script = ExtResource("9_muik2")
+
+[node name="WinAreas" type="Node2D" parent="."]
+
+[node name="WinningArea" type="Area2D" parent="WinAreas"]
+
+[node name="W1" type="CollisionShape2D" parent="WinAreas/WinningArea"]
+position = Vector2(32, 39.5)
+shape = SubResource("RectangleShape2D_ic73b")
+
+[node name="WinningArea2" type="Area2D" parent="WinAreas"]
+
+[node name="W2" type="CollisionShape2D" parent="WinAreas/WinningArea2"]
+position = Vector2(96, 40)
+shape = SubResource("RectangleShape2D_ic73b")
+
+[node name="WinningArea3" type="Area2D" parent="WinAreas"]
+
+[node name="W3" type="CollisionShape2D" parent="WinAreas/WinningArea3"]
+position = Vector2(160, 40)
+shape = SubResource("RectangleShape2D_ic73b")
+
+[node name="WinningArea4" type="Area2D" parent="WinAreas"]
+
+[node name="W4" type="CollisionShape2D" parent="WinAreas/WinningArea4"]
+position = Vector2(224, 40)
+shape = SubResource("RectangleShape2D_ic73b")
+
+[node name="WinningArea5" type="Area2D" parent="WinAreas"]
+
+[node name="W5" type="CollisionShape2D" parent="WinAreas/WinningArea5"]
+position = Vector2(288, 40)
+shape = SubResource("RectangleShape2D_ic73b")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_y30ow")
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 33.0
+offset_right = 39.0
+offset_bottom = 47.0
+texture = ExtResource("7_7wb3b")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 90.0
+offset_top = 33.0
+offset_right = 104.0
+offset_bottom = 47.0
+texture = ExtResource("7_7wb3b")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Control"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 153.0
+offset_top = 33.0
+offset_right = 167.0
+offset_bottom = 47.0
+texture = ExtResource("7_7wb3b")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Control"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 217.0
+offset_top = 33.0
+offset_right = 231.0
+offset_bottom = 47.0
+texture = ExtResource("7_7wb3b")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="Control"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 281.0
+offset_top = 33.0
+offset_right = 295.0
+offset_bottom = 47.0
+texture = ExtResource("7_7wb3b")
+expand_mode = 1
+
+[node name="Score" type="Label" parent="Control"]
+top_level = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 43.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 0.803922, 1)
+theme_override_fonts/font = ExtResource("9_jqf74")
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="Lives" type="Label" parent="Control"]
+top_level = true
+layout_mode = 0
+offset_left = 305.0
+offset_top = -3.0
+offset_right = 345.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.674928, 0.240204, 0.161271, 1)
+theme_override_fonts/font = ExtResource("9_jqf74")
+theme_override_font_sizes/font_size = 32
+text = "3"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAoAAAACAAAAAAAAAAsAAAACAAAAAAABAAoAAAACAAAAAAABAAsAAAACAAAAAAACAAoAAAACAAAAAAACAAsAAAACAAAAAAADAAoAAAACAAAAAAADAAsAAAACAAAAAAAEAAoAAAACAAAAAAAEAAsAAAACAAAAAAAFAAoAAAACAAAAAAAFAAsAAAACAAAAAAAGAAoAAAACAAAAAAAGAAsAAAACAAAAAAAHAAoAAAACAAAAAAAHAAsAAAACAAAAAAAIAAoAAAACAAAAAAAIAAsAAAACAAAAAAAJAAoAAAACAAAAAAAJAAsAAAACAAAAAAAKAAoAAAACAAAAAAAKAAsAAAACAAAAAAALAAoAAAACAAAAAAALAAsAAAACAAAAAAAMAAoAAAACAAAAAAAMAAsAAAACAAAAAAANAAoAAAACAAAAAAANAAsAAAACAAAAAAAOAAoAAAACAAAAAAAOAAsAAAACAAAAAAAPAAoAAAACAAAAAAAPAAsAAAACAAAAAAAQAAoAAAACAAAAAAAQAAsAAAACAAAAAAARAAoAAAACAAAAAAARAAsAAAACAAAAAAASAAoAAAACAAAAAAASAAsAAAACAAAAAAATAAoAAAACAAAAAAATAAsAAAACAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAASAAkAAAAAAAAAAAATAAkAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAUAAAAAAAIAAAAAAAYAAAAAAAIAAAAAAAcAAAAAAAIAAAAAAAgAAAAAAAEAAAABAAQAAAAAAAIAAAABAAUAAAAAAAIAAAABAAYAAAAAAAIAAAABAAcAAAAAAAIAAAABAAgAAAAAAAEAAAACAAQAAAAAAAIAAAACAAUAAAAAAAIAAAACAAYAAAAAAAIAAAACAAcAAAAAAAIAAAACAAgAAAAAAAEAAAADAAQAAAAAAAIAAAADAAUAAAAAAAIAAAADAAYAAAAAAAIAAAADAAcAAAAAAAIAAAADAAgAAAAAAAEAAAAEAAQAAAAAAAIAAAAEAAUAAAAAAAIAAAAEAAYAAAAAAAIAAAAEAAcAAAAAAAIAAAAEAAgAAAAAAAEAAAAFAAQAAAAAAAIAAAAFAAUAAAAAAAIAAAAFAAYAAAAAAAIAAAAFAAcAAAAAAAIAAAAFAAgAAAAAAAEAAAAGAAQAAAAAAAIAAAAGAAUAAAAAAAIAAAAGAAYAAAAAAAIAAAAGAAcAAAAAAAIAAAAGAAgAAAAAAAEAAAAHAAQAAAAAAAIAAAAHAAUAAAAAAAIAAAAHAAYAAAAAAAIAAAAHAAcAAAAAAAIAAAAHAAgAAAAAAAEAAAAIAAQAAAAAAAIAAAAIAAUAAAAAAAIAAAAIAAYAAAAAAAIAAAAIAAcAAAAAAAIAAAAIAAgAAAAAAAEAAAAJAAQAAAAAAAIAAAAJAAUAAAAAAAIAAAAJAAYAAAAAAAIAAAAJAAcAAAAAAAIAAAAJAAgAAAAAAAEAAAAKAAQAAAAAAAIAAAAKAAUAAAAAAAIAAAAKAAYAAAAAAAIAAAAKAAcAAAAAAAIAAAAKAAgAAAAAAAEAAAALAAQAAAAAAAIAAAALAAUAAAAAAAIAAAALAAYAAAAAAAIAAAALAAcAAAAAAAIAAAALAAgAAAAAAAEAAAAMAAQAAAAAAAIAAAAMAAUAAAAAAAIAAAAMAAYAAAAAAAIAAAAMAAcAAAAAAAIAAAAMAAgAAAAAAAEAAAANAAQAAAAAAAIAAAANAAUAAAAAAAIAAAANAAYAAAAAAAIAAAANAAcAAAAAAAIAAAANAAgAAAAAAAEAAAAOAAQAAAAAAAIAAAAOAAUAAAAAAAIAAAAOAAYAAAAAAAIAAAAOAAcAAAAAAAIAAAAOAAgAAAAAAAEAAAAPAAQAAAAAAAIAAAAPAAUAAAAAAAIAAAAPAAYAAAAAAAIAAAAPAAcAAAAAAAIAAAAPAAgAAAAAAAEAAAAQAAQAAAAAAAIAAAAQAAUAAAAAAAIAAAAQAAYAAAAAAAIAAAAQAAcAAAAAAAIAAAAQAAgAAAAAAAEAAAARAAQAAAAAAAIAAAARAAUAAAAAAAIAAAARAAYAAAAAAAIAAAARAAcAAAAAAAIAAAARAAgAAAAAAAEAAAASAAQAAAAAAAIAAAASAAUAAAAAAAIAAAASAAYAAAAAAAIAAAASAAcAAAAAAAIAAAASAAgAAAAAAAEAAAATAAQAAAAAAAIAAAATAAUAAAAAAAIAAAATAAYAAAAAAAIAAAATAAcAAAAAAAIAAAATAAgAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAIAAAABAAIAAAAAAAIAAAABAAMAAAAAAAIAAAACAAIAAAAAAAIAAAACAAMAAAAAAAIAAAADAAIAAAAAAAEAAAADAAMAAAAAAAIAAAAEAAIAAAAAAAEAAAAEAAMAAAAAAAIAAAAFAAIAAAAAAAIAAAAFAAMAAAAAAAIAAAAGAAIAAAAAAAIAAAAGAAMAAAAAAAIAAAAHAAIAAAAAAAEAAAAHAAMAAAAAAAIAAAAIAAIAAAAAAAEAAAAIAAMAAAAAAAIAAAAJAAMAAAAAAAIAAAAKAAIAAAAAAAIAAAAKAAMAAAAAAAIAAAALAAIAAAAAAAEAAAALAAMAAAAAAAIAAAAMAAIAAAAAAAEAAAAMAAMAAAAAAAIAAAANAAIAAAAAAAIAAAANAAMAAAAAAAIAAAAOAAMAAAAAAAIAAAAPAAIAAAAAAAEAAAAPAAMAAAAAAAIAAAAQAAIAAAAAAAEAAAAQAAMAAAAAAAIAAAARAAIAAAAAAAIAAAARAAMAAAAAAAIAAAASAAIAAAAAAAIAAAASAAMAAAAAAAIAAAATAAIAAAAAAAEAAAATAAMAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAEAAAABAAAAAAAAAAEAAAABAAEAAAAAAAEAAAACAAAAAAAAAAEAAAACAAEAAAAAAAEAAAADAAAAAAAAAAEAAAADAAEAAAAAAAEAAAAEAAAAAAAAAAEAAAAEAAEAAAAAAAEAAAAFAAAAAAAAAAEAAAAFAAEAAAAAAAEAAAAGAAAAAAAAAAEAAAAGAAEAAAAAAAEAAAAHAAAAAAAAAAEAAAAHAAEAAAAAAAEAAAAIAAAAAAAAAAEAAAAIAAEAAAAAAAEAAAAJAAAAAAAAAAEAAAAJAAEAAAAAAAEAAAAKAAAAAAAAAAEAAAAKAAEAAAAAAAEAAAALAAAAAAAAAAEAAAALAAEAAAAAAAEAAAAMAAAAAAAAAAEAAAAMAAEAAAAAAAEAAAANAAAAAAAAAAEAAAANAAEAAAAAAAEAAAAOAAAAAAAAAAEAAAAOAAEAAAAAAAEAAAAPAAAAAAAAAAEAAAAPAAEAAAAAAAEAAAAQAAAAAAAAAAEAAAAQAAEAAAAAAAEAAAARAAAAAAAAAAEAAAARAAEAAAAAAAEAAAASAAAAAAAAAAEAAAASAAEAAAAAAAEAAAATAAAAAAAAAAEAAAATAAEAAAAAAAEAAAAAAA4AAAAAAAEAAAABAA4AAAAAAAEAAAACAA4AAAAAAAEAAAADAA4AAAAAAAEAAAAEAA4AAAAAAAEAAAAFAA4AAAAAAAEAAAAGAA4AAAAAAAEAAAAHAA4AAAAAAAEAAAAIAA4AAAAAAAEAAAAJAA4AAAAAAAEAAAAKAA4AAAAAAAEAAAALAA4AAAAAAAEAAAAMAA4AAAAAAAEAAAANAA4AAAAAAAEAAAAOAA4AAAAAAAEAAAAPAA4AAAAAAAEAAAAQAA4AAAAAAAEAAAARAA4AAAAAAAEAAAASAA4AAAAAAAEAAAAAAAwAAAACAAAAAAAAAA0AAAACAAAAAAABAAwAAAACAAAAAAABAA0AAAACAAAAAAACAAwAAAACAAAAAAACAA0AAAACAAAAAAADAAwAAAACAAAAAAADAA0AAAACAAAAAAAEAAwAAAACAAAAAAAEAA0AAAACAAAAAAAFAAwAAAACAAAAAAAFAA0AAAACAAAAAAAGAAwAAAACAAAAAAAGAA0AAAACAAAAAAAHAAwAAAACAAAAAAAHAA0AAAACAAAAAAAIAAwAAAACAAAAAAAIAA0AAAACAAAAAAAJAAwAAAACAAAAAAAJAA0AAAACAAAAAAAKAAwAAAACAAAAAAAKAA0AAAACAAAAAAALAAwAAAACAAAAAAALAA0AAAACAAAAAAAMAAwAAAACAAAAAAAMAA0AAAACAAAAAAANAAwAAAACAAAAAAANAA0AAAACAAAAAAAOAAwAAAACAAAAAAAOAA0AAAACAAAAAAAPAAwAAAACAAAAAAAPAA0AAAACAAAAAAAQAAwAAAACAAAAAAAQAA0AAAACAAAAAAARAAwAAAACAAAAAAARAA0AAAACAAAAAAASAAwAAAACAAAAAAASAA0AAAACAAAAAAATAAwAAAACAAAAAAATAA0AAAACAAAAAAATAA4AAAAAAAEAAAAOAAIAAAAAAAIAAAAJAAIAAAAAAAIAAAA=")
+tile_set = SubResource("TileSet_6qpl3")
+
+[node name="Lanes" type="Node2D" parent="."]
+
+[node name="Lane1" type="Area2D" parent="Lanes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lanes/Lane1"]
+position = Vector2(160, 216)
+shape = SubResource("RectangleShape2D_vojy0")
+one_way_collision_margin = 0.0
+
+[node name="Lane2" type="Area2D" parent="Lanes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lanes/Lane2"]
+position = Vector2(160, 200)
+shape = SubResource("RectangleShape2D_vojy0")
+one_way_collision_margin = 0.0
+
+[node name="Lane3" type="Area2D" parent="Lanes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lanes/Lane3"]
+position = Vector2(160, 184)
+shape = SubResource("RectangleShape2D_vojy0")
+one_way_collision_margin = 0.0
+
+[node name="Lane4" type="Area2D" parent="Lanes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lanes/Lane4"]
+position = Vector2(160, 168)
+shape = SubResource("RectangleShape2D_vojy0")
+one_way_collision_margin = 0.0
+
+[node name="Lane5" type="Area2D" parent="Lanes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lanes/Lane5"]
+position = Vector2(160, 151)
+shape = SubResource("RectangleShape2D_vojy0")
+one_way_collision_margin = 0.0
+
+[node name="Lane6" type="Area2D" parent="Lanes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lanes/Lane6"]
+position = Vector2(160, 136)
+shape = SubResource("RectangleShape2D_vojy0")
+one_way_collision_margin = 0.0
+
+[connection signal="area_entered" from="Water" to="Frog" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Water" to="Frog" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="WinAreas/WinningArea" to="Frog" method="_on_winning_area_1_entered"]
+[connection signal="area_entered" from="WinAreas/WinningArea2" to="Frog" method="_on_winning_area_2_entered"]
+[connection signal="area_entered" from="WinAreas/WinningArea3" to="Frog" method="_on_winning_area_3_entered"]
+[connection signal="area_entered" from="WinAreas/WinningArea4" to="Frog" method="_on_winning_area_4_entered"]
+[connection signal="area_entered" from="WinAreas/WinningArea5" to="Frog" method="_on_winning_area_5_entered"]
+[connection signal="area_entered" from="Lanes/Lane1" to="Frog" method="_on_lane_1_area_entered"]
+[connection signal="area_entered" from="Lanes/Lane2" to="Frog" method="_on_lane_2_area_entered"]
+[connection signal="area_entered" from="Lanes/Lane3" to="Frog" method="_on_lane_3_area_entered"]
+[connection signal="area_entered" from="Lanes/Lane4" to="Frog" method="_on_lane_4_area_entered"]
+[connection signal="area_entered" from="Lanes/Lane5" to="Frog" method="_on_lane_5_area_entered"]
+[connection signal="area_entered" from="Lanes/Lane6" to="Frog" method="_on_lane_6_area_entered"]
